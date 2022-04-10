@@ -1,0 +1,13 @@
+{
+  "guildID": "904898128325533746",
+  "prefix": "?",
+  "token": "TOKEN-HERE",
+  "staffRole": "928811284194025493",
+
+  "channels": {
+    "suggestionChannel": "922961731205074984",
+    "pendingChannel": "922961491555143750",
+    "acceptedChannel": "922961252345585665",
+    "deniedChannel": "922949272461254706"
+  }
+}
