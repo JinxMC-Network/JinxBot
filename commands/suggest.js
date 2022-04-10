@@ -6,38 +6,38 @@ module.exports.help = {
 	Restrictions: "N/A"
 }
 module.exports.run = async (client, message, args) => {
-	let prefix = config.prefix
+	let prefix = process.env.PREFIX	
 
 	//Command can only be used in 1 channel
-	if(message.channel.id !== config.channels.suggestionChannel){
-		let invalidChannel = new Discord.MessageEmbed()
-		invalidChannel.setDescription(`:x: This command can only be used in <#${config.channels.suggestionChannel}>`)
-		invalidChannel.setColor("#ff0000")
+	if(message.channel.id !== process.env.SUGGESTION){
+		let invalidChannel = new MessageEmbed()
+		.setDescription(`:x: This command can only be used in <#${process.env.SUGGESTION}>`)
+		.setColor("#ff0000")
 		return message.reply({embeds: [invalidChannel], allowedMentions: {repliedUser: true}})
 	}
 
 	let suggestion = args.join(" ")
 	if(!suggestion || suggestion === "" || suggestion.length < 2){
-		let invalidFormat = new Discord.MessageEmbed()
-		invalidFormat.setDescription(`:x: Incorrect format. Correct format: \n\`\`\`${prefix}suggest (suggestion here)\`\`\``)
-		invalidFormat.setColor("#ff0000")
+		let invalidFormat = new MessageEmbed()
+		.setDescription(`:x: Incorrect format. Correct format: \n\`\`\`${prefix}suggest (suggestion here)\`\`\``)
+		.setColor("#ff0000")
 		return message.reply({embeds: [invalidFormat], allowedMentions: {repliedUser: true}})
 	}
 
 	let id = nanoid(7)
-	let suggestionEmbed = new Discord.MessageEmbed()
+	let suggestionEmbed = new MessageEmbed()
 	let avatar = message.author.displayAvatarURL()
 	let user = message.author
 
 	//Suggestion = Pending Embed
-	suggestionEmbed.setTitle(`${message.author.tag}'s suggestion | Pending`)
-	suggestionEmbed.setDescription(`\`\`\`${suggestion}\`\`\``)
-	suggestionEmbed.setColor('#ea00ff')
-	suggestionEmbed.setFooter(`Suggestion ID: ${id}`)
-	suggestionEmbed.setTimestamp()
-	suggestionEmbed.setThumbnail(avatar)
+	.setTitle(`${message.author.tag}'s suggestion | Pending`)
+	.setDescription(`\`\`\`${suggestion}\`\`\``)
+	.setColor('#ea00ff')
+	.setFooter(`Suggestion ID: ${id}`)
+	.setTimestamp()
+	.setThumbnail(avatar)
 
-	let suggestionMessage = await message.guild.channels.cache.get(config.channels.pendingChannel).send({embeds: [suggestionEmbed]})
+	let suggestionMessage = await message.guild.channels.cache.get(process.env.PENDING).send({embeds: [suggestionEmbed]})
 
 	//creates the thread, reacts with :yay: and :nay:.
 	await suggestionMessage.startThread({name: `Discussion - ${id}`})

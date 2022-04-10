@@ -7,7 +7,7 @@ module.exports.help = {
 
 module.exports.run = async (client, message, args) => {
 
-	if(!message.member.roles.cache.has(config.staffRole)){
+	if(!message.member.roles.cache.has(process.env.STAFF_ROLE)){
 		message.reply("You are not permitted to use this.")
 		return;
 	}
@@ -23,20 +23,20 @@ module.exports.run = async (client, message, args) => {
 	let suggestionEntry = client.suggestions.get(suggestionId)
 
 	//Embed for the accepted suggestion.
-	let acceptedEmbed = new Discord.MessageEmbed()
-	acceptedEmbed.setTitle(`${suggestionEntry.user}'s suggestion | Accepted`)
-	acceptedEmbed.setDescription(`\`\`\`${suggestionEntry.suggestion}\`\`\``)
-	acceptedEmbed.addField("Notes:", `\`\`\`${response}\`\`\``)
-	acceptedEmbed.setColor('#00AA00')
-	acceptedEmbed.setTimestamp(suggestionEntry.timestamp)
-	acceptedEmbed.setThumbnail(suggestionEntry.avatar)
-	acceptedEmbed.setFooter(`Accepted by: ${message.author.tag}`)
+	let acceptedEmbed = new MessageEmbed()
+	.setTitle(`${suggestionEntry.user}'s suggestion | Accepted`)
+	.setDescription(`\`\`\`${suggestionEntry.suggestion}\`\`\``)
+	.addField("Notes:", `\`\`\`${response}\`\`\``)
+	.setColor('#00AA00')
+	.setTimestamp(suggestionEntry.timestamp)
+	.setThumbnail(suggestionEntry.avatar)
+	.setFooter(`Accepted by: ${message.author.tag}`)
 	
-	let suggestionMessage = await message.guild.channels.cache.get(config.channels.pendingChannel).messages.fetch(suggestionEntry.messageId)
+	let suggestionMessage = await message.guild.channels.cache.get(process.env.PENDING).messages.fetch(suggestionEntry.messageId)
 	await suggestionMessage.delete()
 	await suggestionMessage.thread.delete()
 	suggestionEntry.status = "ACCEPTED"
-	message.guild.channels.cache.get(config.channels.acceptedChannel).send({embeds: [acceptedEmbed]})
+	message.guild.channels.cache.get(process.env.ACCEPTED).send({embeds: [acceptedEmbed]})
 	client.suggestions.set(suggestionId, suggestionEntry)
 	
 	await message.delete()
