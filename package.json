@@ -1,22 +1,29 @@
 {
   "description": "",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "contributors": [
-    "Balin Grant"
+    "Balin Grant",
+    "Evident"
   ],
   "license": "ISC",
   "dependencies": {
     "alphanumeric-id": "^1.0.1",
-    "discord-xp": "^1.1.16",
-    "discord.js": "^13.3.1",
+    "better-sqlite3": "^7.5.1",
+    "discord.js": "^13.6.0",
     "dotenv": "^16.0.0",
     "enmap": "^5.8.4",
-    "mongoose": "^5.11.14",
+    "moment": "^2.29.2",
+    "moment-duration-format": "^2.3.2",
     "nanoid": "^3.1.30",
-    "nodemon": "^2.0.15"
+    "nodeactyl": "^3.2.2",
+    "nodemon": "^2.0.15",
+    "pterodactyl.js": "^2.1.1"
+  },
+  "devDependencies": {
+    "eslint": "^8.13.0"
   }
 }

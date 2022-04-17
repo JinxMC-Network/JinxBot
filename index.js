@@ -9,10 +9,7 @@ require("dotenv").config();
 // Clear the console and setup the client
 console.clear()
 
-// global.client = new Discord.Client({partials: [`MESSAGE`, `CHANNEL`, `REACTION`],intents: [GUILD_MEMBERS, Discord.Intents.FLAGS.GUILD_MESSAGES,Discord.Intents.FLAGS.GUILDS,]})
-
- global.client = new Discord.Client({ intents: ["GUILDS", "GUILD_MESSAGES", "DIRECT_MESSAGES", "DIRECT_MESSAGE_TYPING", "DIRECT_MESSAGE_REACTIONS", "GUILD_MEMBERS"], partials: ["CHANNEL"] })
-
+global.client = new Discord.Client({ intents: ["GUILDS", "GUILD_MESSAGES", "DIRECT_MESSAGES", "DIRECT_MESSAGE_TYPING", "DIRECT_MESSAGE_REACTIONS", "GUILD_MEMBERS"], partials: ["CHANNEL"] })
 
 // Create the needed databases for the bot
 client.commands = new Enmap();
@@ -46,5 +43,6 @@ fs.readdir("./commands", (err, files) => {
 
   });
 });
-// Login to the client using the token in the env` file
+
+// Login to the client using the token in the env file
 client.login(process.env.TOKEN)

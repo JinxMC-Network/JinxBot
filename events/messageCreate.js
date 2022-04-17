@@ -1,13 +1,10 @@
-const { client } = require("../index.js");
-const { MessageEmbed, ClientUser, MessageButton } = require("discord.js")
+require("../index.js");
+const { MessageEmbed } = require("discord.js")
 let channelID = process.env.MODMAIL_CHANNEL;
-
 
 module.exports = async(client, message) => {
 
-
-
-	 if(message.author.id == '924021335724789770' || message.author.id =='923071514163707965') return;
+	 if(message.author.id === '924021335724789770' || message.author.id === '923071514163707965') return;
 	 if(message.channel.type === 'DM' || message.content.startsWith("private ")){
 
     let channel = message.channel.type;
@@ -21,19 +18,17 @@ module.exports = async(client, message) => {
     }
 
     let mContent;
-    if(message.content.length == 0){
+    if(message.content.length === 0){
       mContent = "**None**";
     } else {
       mContent = message.content;
     }
 
-
-    let aContent;
-    if(message.attachments.length == 0){
-      aContent = "**None**";
-    } else {
-      aContent = "**Some**";
+    if(message.attachments.length === undefined){
+//         message.channel.send("I cannot see attachments. Please send images/files with a link.")
+    console.log("its undefined")
     }
+
 
     let embed = new MessageEmbed()
     .setColor('#FF0000')
@@ -43,23 +38,15 @@ module.exports = async(client, message) => {
       { name: '\u200B', value: '\u200B', inline: true },
       { name: '**Channel**', value: channel, inline: true})
     .setThumbnail("https://images-ext-1.discordapp.net/external/AwkdRkXWlpPdIsjDM716uH2HI0CPP6GxPlnMqwT0W_g/https/i.imgur.com/zY8VBQ8.png")
-
-    // Need to check if the messages are null, and if they are, log that it's null.
-    
     .addField('Message', mContent)
-    .addField('Attachments', aContent)
-    // .addField('Attachments', message.attachments.first(10).url)
 
     if (message.channel.type === "GUILD_TEXT"){
       message.delete();
 
     }
-    console.log(mContent)
     client.channels.cache.get(channelID).send({ embeds: [embed]});
-    
+
   }
-
-
 
 	// Ignore all bots
 	if(message.author.bot) return

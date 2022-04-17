@@ -1,4 +1,6 @@
 const {nanoid} = require("nanoid");
+const {MessageEmbed} = require("discord.js");
+
 module.exports.help = {
 	Name: "Command",
 	RoleNeeded: "Administrator",
@@ -6,7 +8,7 @@ module.exports.help = {
 	Restrictions: "N/A"
 }
 module.exports.run = async (client, message, args) => {
-	let prefix = process.env.PREFIX	
+	let prefix = process.env.PREFIX
 
 	//Command can only be used in 1 channel
 	if(message.channel.id !== process.env.SUGGESTION){
@@ -25,15 +27,15 @@ module.exports.run = async (client, message, args) => {
 	}
 
 	let id = nanoid(7)
-	let suggestionEmbed = new MessageEmbed()
 	let avatar = message.author.displayAvatarURL()
 	let user = message.author
 
 	//Suggestion = Pending Embed
+	let suggestionEmbed = new MessageEmbed()
 	.setTitle(`${message.author.tag}'s suggestion | Pending`)
 	.setDescription(`\`\`\`${suggestion}\`\`\``)
 	.setColor('#ea00ff')
-	.setFooter(`Suggestion ID: ${id}`)
+	.setFooter({text: `Suggestion ID: ${id}`})
 	.setTimestamp()
 	.setThumbnail(avatar)
 

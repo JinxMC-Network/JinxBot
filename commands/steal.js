@@ -1,4 +1,4 @@
-const { Client, Message, MessageEmbed, Util } = require("discord.js");
+const { MessageEmbed, Util } = require("discord.js");
 
 module.exports.run = async (client, message, args) =>{
 
@@ -22,8 +22,7 @@ module.exports.run = async (client, message, args) =>{
         const parsed_emoji = Util.parseEmoji(raw_emoji);
         if(parsed_emoji.id){
             const extension = parsed_emoji.animated ? ".gif" : ".png";
-            const url = `https://cdn.discordapp.com/emojis/${parsed_emoji.id + extension}`;
-
+            let url = `https://cdn.discordapp.com/emojis/${parsed_emoji.id + extension}`;
             try {
                 message.guild.emojis.create(url, parsed_emoji.name).then((emoji) => {
 

@@ -1,3 +1,5 @@
+const {MessageEmbed} = require("discord.js");
+
 module.exports.help = {
 	Name: "Command",
 	RoleNeeded: "Administrator",
@@ -25,8 +27,7 @@ module.exports.run = async (client, message, args) => {
 	.setColor('#ff0000')
 	.setTimestamp(suggestionEntry.timestamp)
 	.setThumbnail(suggestionEntry.avatar)
-	.setFooter(`Denied by: ${message.author.tag}`)
-	
+	.setFooter({text: `Denied by: ${message.author.tag}`})	
 	let suggestionMessage = await message.guild.channels.cache.get(process.env.PENDING).messages.fetch(suggestionEntry.messageId)
 	await suggestionMessage.delete()
 	await suggestionMessage.thread.delete()
