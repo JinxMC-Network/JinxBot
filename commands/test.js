@@ -12,10 +12,10 @@ module.exports.run = async (client, message, args) =>{
 
             const joinEmbed = new MessageEmbed()
             .setColor('#9b59b6')
-            .setAuthor(`${message.member.user.username}`, `${message.member.user.displayAvatarURL({ dynamic: true })}`)
+            .setAuthor({name: `${message.member.user.username}`, iconURL: `${message.member.user.displayAvatarURL({ dynamic: true })}`})
             .setDescription(`Welcome <@${message.member.id}> to JinxMC!`)
             .setThumbnail(url);
-            return message.channel.send({embeds: [joinEmbed]});
+            message.channel.send({embeds: [joinEmbed]});
             break;
 
         case "leave":
@@ -24,18 +24,31 @@ module.exports.run = async (client, message, args) =>{
 
             const leaveEmbed = new MessageEmbed()
             .setColor('#9b59b6')
-            .setAuthor(`${message.member.user.username}`, `${message.member.user.displayAvatarURL({ dynamic: true })}`)
+            .setAuthor({name: `${message.member.user.username}`, iconURL: `${message.member.user.displayAvatarURL({ dynamic: true })}`})
             .setDescription(`Goodbye <@${message.member.id}>...`)
             .setThumbnail(url);
-            return message.channel.send({embeds: [leaveEmbed]});
+            message.channel.send({embeds: [leaveEmbed]});
             break;
+        case "memberadd":
+                let guild = client.guilds.cache.get(process.env.GUILD_ID);
+                let memberCount = args[1];
+                let memberCountChannel = guild.channels.cache.get(process.env.MEMBER_COUNT_CHANNEL);
+                if(memberCount === undefined){ memberCount = guild.memberCount }
+                message.channel.send(`${memberCount}`)
+                try {
+                    memberCountChannel.setName(`Members:  ${memberCount}`)
+                } catch {
 
+                }
+                console.log(memberCount)
+                break;
         case undefined:
             message.reply("please specify an argument");
             break;
-            
+
         default:
             message.channel.send("I don't know what you mean by " + args[0]);
             break;
+
     }
 };
