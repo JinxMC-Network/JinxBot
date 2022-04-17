@@ -6,7 +6,7 @@ module.exports = async(client, member) => {
 
     let randomAnswer = join[Math.floor(Math.random() * join.length)];
     let joinURL = `https://cdn.discordapp.com/emojis/${randomAnswer}.gif`;
-    
+
     const joinEmbed = new MessageEmbed()
     .setColor('#9b59b6')
     .setAuthor({name: `${member.user.username}`, iconURL: `${member.user.displayAvatarURL({ dynamic: true })}`})
