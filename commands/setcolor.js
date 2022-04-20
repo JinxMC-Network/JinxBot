@@ -42,6 +42,6 @@ module.exports.run = async (client, message, args) => {
         message.channel.send({
             embeds: [new MessageEmbed()
                 .setColor('RED')
-                .setDescription(`Your color has been updated to \`${roleColor}\`.`)]});
+                .setDescription(`"Could not set role color. Contact a staff member for help"`)]});
     }
 }
