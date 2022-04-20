@@ -1,8 +1,8 @@
-const { MessageEmbed } = require("discord.js");
+const { MessageEmbed, MessageActionRow, MessageButton } = require("discord.js");
 let randomAnswer;
 let url;
 
-module.exports.run = async (client, message, args) =>{
+module.exports.run = async (client, message, args, interaction) =>{
 
 
     switch (args[0]){
@@ -42,6 +42,39 @@ module.exports.run = async (client, message, args) =>{
                 }
                 console.log(memberCount)
                 break;
+        case "buttons":
+            const buttonsEmbed = new MessageEmbed()
+                .setColor('#9b59b6')
+                .setDescription(`buttonsEmbed`);
+            const row = new MessageActionRow()
+                .addComponents(new MessageButton()
+                        .setCustomId('primary')
+                        .setLabel('primary')
+                        .setStyle('PRIMARY')
+                )
+                .addComponents(new MessageButton()
+                    .setCustomId('secondary')
+                    .setLabel('secondary')
+                    .setStyle('SECONDARY')
+                )
+                .addComponents(new MessageButton()
+                    .setCustomId('success')
+                    .setLabel('success')
+                    .setStyle('SUCCESS')
+                )
+                    .addComponents(new MessageButton()
+                        .setLabel('Link')
+                        .setStyle('LINK')
+                        .setURL("https://google.com")
+                    )
+                .addComponents(new MessageButton()
+                        .setCustomId('danger')
+                        .setLabel('danger')
+                        .setStyle('DANGER')
+
+                );
+            message.channel.send({embeds: [buttonsEmbed], components: [row] });
+            break;
         case undefined:
             message.reply("please specify an argument");
             break;
