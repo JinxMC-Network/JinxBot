@@ -5,10 +5,9 @@ module.exports = async(client, interaction, message) => {
     let failedButton = new MessageEmbed()
     .setDescription('A user pressed a button which didn\'t work correctly. \nSee information below to debug it.')
     .addFields(
-          { name: '**User**', value: `${interaction.user.tag}`, inline: true },
-          { name: '**ButtonID**', value: `${interaction.customId}`, inline: true },
-
-)
+        { name: '**User**', value: `${interaction.user.tag}`, inline: true },
+        { name: '**ButtonID**', value: `${interaction.customId}`, inline: true },
+        )
         switch (interaction.customId){
                 case "test-primary":
                 console.log("Test-Primary is active.");
