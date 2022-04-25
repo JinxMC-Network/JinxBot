@@ -29,6 +29,7 @@ module.exports.run = async (client, message, args, interaction) =>{
             .setThumbnail(url);
             message.channel.send({embeds: [leaveEmbed]});
             break;
+
         case "memberadd":
                 let guild = client.guilds.cache.get(process.env.GUILD_ID);
                 let memberCount = args[1];
@@ -38,7 +39,7 @@ module.exports.run = async (client, message, args, interaction) =>{
                 try {
                     memberCountChannel.setName(`Members:  ${memberCount}`)
                 } catch {
-
+                console.error()
                 }
                 console.log(memberCount)
                 break;
@@ -48,7 +49,7 @@ module.exports.run = async (client, message, args, interaction) =>{
                 .setDescription(`buttonsEmbed`);
             const row = new MessageActionRow()
                 .addComponents(new MessageButton()
-                        .setCustomId('primary')
+                        .setCustomId('test-primary')
                         .setLabel('primary')
                         .setStyle('PRIMARY')
                 )
@@ -73,7 +74,7 @@ module.exports.run = async (client, message, args, interaction) =>{
                         .setStyle('DANGER')
 
                 );
-            message.channel.send({embeds: [buttonsEmbed], components: [row] });
+            message.channel.send({embeds: [buttonsEmbed], components: [row]});
             break;
         case undefined:
             message.reply("please specify an argument");
